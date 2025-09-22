@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Lacquer/OFL.txt",
+      "sha1": "d5440dec84817ba4ed3d253008d7be934a50dd1a"
+    },
+    {
+      "path": "assets/fonts/Lacquer-Regular.ttf",
+      "sha1": "c9301d11c160a92f771cafe8a23d84dc37fa5bed"
+    },
+    {
+      "path": "assets/fonts/Lacquer.zip",
+      "sha1": "f5e9d8155a31d5049c9ba5ed19e80956e9949ded"
+    },
+    {
+      "path": "assets/fonts/Metamorphous-Regular.ttf",
+      "sha1": "bfb38ba59ece3e1e2d7c0a1e476e7f54383dc9d6"
+    },
+    {
+      "path": "assets/fonts/Metamorphous.zip",
+      "sha1": "8595f308d1695ff8a5f4476fef14baa494216a2e"
+    }
+  ]
+}

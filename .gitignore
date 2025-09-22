@@ -73,3 +73,28 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# React Native
+ios/Pods/
+android/.gradle/
+android/app/build/
+android/build/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Bundler
+.expo
