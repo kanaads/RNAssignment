@@ -14,32 +14,20 @@ export class MainViewModel implements IViewModel {
   constructor(initialState?: AppState) {
     this._state = initialState || createInitialAppState();
   }
-
-  /**
-   * Get current state
-   */
+  
   get state(): AppState {
     return this._state;
   }
 
-  /**
-   * Set state change callback for reactive updates
-   */
   setStateChangeCallback(callback: StateChangeCallback): void {
     this._stateChangeCallback = callback;
   }
 
-  /**
-   * Update state and notify listeners
-   */
   private updateState(newState: AppState): void {
     this._state = newState;
     this._stateChangeCallback?.(newState);
   }
 
-  /**
-   * Increment first button count
-   */
   incrementFirstButton(): void {
     const newCount = this._state.firstButton.count + 1;
     const newState = StateService.updateFirstButton(this._state, newCount);
@@ -47,9 +35,6 @@ export class MainViewModel implements IViewModel {
     AccessibilityService.announceButtonPress('First Button');
   }
 
-  /**
-   * Increment second button count
-   */
   incrementSecondButton(): void {
     const newCount = this._state.secondButton.count + 1;
     const newState = StateService.updateSecondButton(this._state, newCount);
@@ -57,18 +42,12 @@ export class MainViewModel implements IViewModel {
     AccessibilityService.announceButtonPress('Second Button');
   }
 
-  /**
-   * Open modal
-   */
   openModal(): void {
     const newState = StateService.updateModal(this._state, true);
     this.updateState(newState);
     AccessibilityService.announcePopupOpening();
   }
 
-  /**
-   * Close modal
-   */
   closeModal(): void {
     const newState = StateService.updateModal(this._state, false);
     this.updateState(newState);
@@ -82,7 +61,6 @@ export const useMainViewModel = (): IViewModel => {
   const [viewModel] = useState(() => new MainViewModel());
   const [state, setState] = useState(viewModel.state);
 
-  // Set up state change callback
   useState(() => {
     viewModel.setStateChangeCallback(setState);
   });
