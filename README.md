@@ -98,6 +98,10 @@ Organized under src/ for clarity and scalability:
 
 src/
 
+├── assets/         #Local static assets you import from code
+
+├── types/         #Global & module declarations
+
 ├── components/      # Reusable UI (buttons, modal, text)
 
 ├── constants/       # Colors, spacing, typography
