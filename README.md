@@ -1,8 +1,13 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+ # React Native Assessment  
+ ## Overview  
+ 
+This project implements the provided Figma design as part of the internship coding assessment.  
+It demonstrates:  
+- A reusable, accessible button component with an enlarged touch area.
+- A modal popup containing text and an animated GIF.
+- A maintainable structure following MVVM principles and clean coding practices.
 
 # Getting Started
-
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
 ## Step 1: Start Metro
 
@@ -62,36 +67,74 @@ If everything is set up correctly, you should see your new app running in the An
 
 This is one way to run your app — you can also build it directly from Android Studio or Xcode.
 
-## Step 3: Modify your app
+Implementation Details
+----------------------
 
-Now that you have successfully run the app, let's make changes!
+### Button Component
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+*   Defined in ChunkyButton.tsx.
+    
+*   Supports configurable colors, sizes, and shadows.
+    
+*   Enlarged touch target via hitSlop.
+    
+*   Screen reader friendly with accessibilityRole and accessibilityLabel.
+    
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Modal
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+*   Defined in PopupModal.tsx.
+    
+*   Triggered by the purple button.
+    
+*   Dismissible via backdrop tap or close button.
+    
+*   Contains a heading, GIF (using react-native-fast-image), and body message.
+    
 
-## Congratulations! :tada:
+### Architecture
 
-You've successfully run and modified your React Native App. :partying_face:
+Organized under src/ for clarity and scalability:
 
-### Now what?
+src/
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+├── components/      # Reusable UI (buttons, modal, text)
 
-# Troubleshooting
+├── constants/       # Colors, spacing, typography
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+├── models/          # App + UI state definitions
 
-# Learn More
+├── viewmodels/     # View logic (MainViewModel)
 
-To learn more about React Native, take a look at the following resources:
+├── services/        # Helpers (e.g. accessibility, state)
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+├── utils/           # Reusable utilities
+
+└── screens/         # Main screen and styles
+
+### Assumptions
+
+*   Fonts are bundled locally: **Lacquer** (body text) and **Metamorphous** (heading).
+    
+*   react-native-fast-image is used to ensure GIF animation works reliably on both platforms.
+    
+*   Minimal state management (via hooks) is sufficient for this scope.
+    
+
+### Future Improvements
+
+With more time, I would:
+
+*   Add automated tests (unit + integration).
+    
+*   Extract design tokens into a theme system for easier theming/dark mode.
+    
+*   Add Storybook for isolated component development.
+
+## Citations
+- React Native documentation
+- `react-native-fast-image` docs
+- https://fonts.google.com/specimen/Lacquer
+- https://fonts.google.com/specimen/Metamorphous
+- Provided Figma design
+- Generative AI (ChatGPT) was used to help draft documentation and suggest code structure/styling patterns. All code was reviewed, edited, and tested by me.
