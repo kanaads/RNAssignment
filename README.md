@@ -129,11 +129,11 @@ src/
 
 With more time, I would:
 
-*   Add automated tests (unit + integration).
+*   Add automated tests (unit + integration). [5-6 Hrs]
     
-*   Extract design tokens into a theme system for easier theming/dark mode.
+*   Extract design tokens into a theme system for easier theming/dark mode. [2-3 Hrs]
     
-*   Add Storybook for isolated component development.
+*   Add Storybook for isolated component development. [2-3 Hrs]
 
 ## Citations
 - React Native documentation
