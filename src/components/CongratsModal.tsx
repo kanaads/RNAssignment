@@ -1,16 +1,43 @@
-import React from "react";
-import { Modal, Pressable, View } from "react-native";
-import FastImage from "react-native-fast-image";
-import AppText from "./AppText";
-import styles from "../screens/MainScreen.styles";
+import React from 'react';
+import { Modal, Pressable, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import AppText from './AppText';
+import styles from '../screens/MainScreen.styles';
+import { 
+  ACCESSIBILITY, 
+  TEST_IDS, 
+  TEXT_CONSTANTS, 
+  HIT_SLOP 
+} from '../constants';
 
-export default function PopupModal({
+/**
+ * Props interface for CongratsModal component
+ */
+interface CongratsModalProps {
+  readonly visible: boolean;
+  readonly onClose: () => void;
+}
+
+/**
+ * CongratsModal component with clean architecture
+ * Handles modal display and user interactions
+ */
+const CongratsModal: React.FC<CongratsModalProps> = ({
   visible,
   onClose,
-}: {
-  visible: boolean;
-  onClose: () => void;
-}) {
+}) => {
+  const handleBackdropPress = (): void => {
+    onClose();
+  };
+
+  const handleModalContentPress = (event: any): void => {
+    event.stopPropagation();
+  };
+
+  const handleClosePress = (): void => {
+    onClose();
+  };
+
   return (
     <Modal
       visible={visible}
@@ -21,44 +48,50 @@ export default function PopupModal({
     >
       <Pressable
         style={styles.modalBackdrop}
-        onPress={onClose}
+        onPress={handleBackdropPress}
         accessibilityRole="button"
-        accessibilityLabel="Close popup"
-        accessibilityHint="Closes the popup message"
-        testID="modalBackdrop"
+        accessibilityLabel={ACCESSIBILITY.CLOSE_LABEL}
+        accessibilityHint={ACCESSIBILITY.CLOSE_HINT}
+        testID={TEST_IDS.MODAL_BACKDROP}
       >
         <Pressable
-          onPress={(e) => e.stopPropagation()}
+          onPress={handleModalContentPress}
           style={styles.modalCard}
           accessibilityViewIsModal
           accessible
         >
           <View style={styles.closeContainer}>
             <Pressable
-              onPress={onClose}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+              onPress={handleClosePress}
+              hitSlop={HIT_SLOP.CLOSE}
               accessibilityLabel="Close"
               accessibilityRole="button"
               style={styles.closeChip}
-              testID="closeChip"
+              testID={TEST_IDS.CLOSE_CHIP}
             >
-              <AppText style={styles.closeText}>✕</AppText>
+              <AppText style={styles.closeText}>
+                {TEXT_CONSTANTS.CLOSE_SYMBOL}
+              </AppText>
             </Pressable>
           </View>
 
-          <AppText style={styles.modalTitle}>CONGRATULATIONS!</AppText>
+          <AppText style={styles.modalTitle}>
+            {TEXT_CONSTANTS.CONGRATULATIONS}
+          </AppText>
 
           <FastImage
-            source={require("../assets/cat.gif")}
+            source={require('../assets/cat.gif')}
             style={styles.catImage}
             resizeMode={FastImage.resizeMode.cover}
           />
 
           <AppText style={styles.modalBody}>
-            HERE IS THE POPUP {"\n"} MESSAGE!
+            {TEXT_CONSTANTS.POPUP_MESSAGE}
           </AppText>
         </Pressable>
       </Pressable>
     </Modal>
   );
-}
+};
+
+export default CongratsModal;

@@ -1,74 +1,67 @@
-import React, { useState, useCallback } from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  AccessibilityInfo,
-} from "react-native";
-import AppText from "../components/AppText";
-import ChunkyButton from "../components/ChunkyButton";
-import CongratsModal from "../components/CongratsModal";
-import styles from "./MainScreen.styles";
+import React from 'react';
+import { View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import ChunkyButton from '../components/ChunkyButton';
+import CongratsModal from '../components/CongratsModal';
+import styles from './MainScreen.styles';
+import { 
+  ACCESSIBILITY, 
+  TEST_IDS, 
+  TEXT_CONSTANTS 
+} from '../constants';
+import { useMainViewModel } from '../viewmodels/MainViewModel';
+import { ButtonUtils } from '../utils/ButtonUtils';
 
-export default function MainScreen() {
-  const [count1, setCount1] = useState(0);
-  const [count2, setCount2] = useState(0);
-  const [open, setOpen] = useState(false);
-
-  const plural = (n: number) => (n === 1 ? "time" : "times");
-
-  const inc1 = useCallback(() => setCount1((c) => c + 1), []);
-  const inc2 = useCallback(() => setCount2((c) => c + 1), []);
-
-  const openModal = useCallback(() => {
-    setOpen(true);
-    AccessibilityInfo.announceForAccessibility?.("Popup opened: Congratulations!");
-  }, []);
-  const closeModal = useCallback(() => setOpen(false), []);
+/**
+ * MainScreen component following MVVM pattern
+ * View layer - only handles UI rendering and user interactions
+ */
+const MainScreen: React.FC = () => {
+  const viewModel = useMainViewModel();
+  const { state, incrementFirstButton, incrementSecondButton, openModal, closeModal } = viewModel;
 
   return (
     <SafeAreaView style={styles.screen}>
-
       <Text
-          style={styles.title}
-          accessibilityRole="header"
-          accessibilityLabel="Coding Interview: React Native Test"
-        >
-          Coding{"\n"}Interview: React{"\n"}Native Test
-        </Text>
-        <View style={styles.spacer } />
+        style={styles.title}
+        accessibilityRole="header"
+        accessibilityLabel={ACCESSIBILITY.TITLE_LABEL}
+      >
+        {TEXT_CONSTANTS.TITLE}
+      </Text>
+      
+      <View style={styles.spacer} />
+      
       <View style={styles.container}>
-        
-        
-
         <ChunkyButton
-          label={`You've clicked this\nbutton ${count1} ${plural(count1)}`}
-          color="#FF7C27"
-          shadowColor="#632700"
-          onPress={inc1}
-          testID="orangeBtn"
+          label={state.firstButton.label}
+          onPress={incrementFirstButton}
+          testID={TEST_IDS.ORANGE_BUTTON}
+          {...ButtonUtils.createOrangeButtonConfig()}
         />
 
-
-
+        <View style={styles.spacer} />
         <ChunkyButton
-          label={`You've clicked this\nbutton ${count2} ${plural(count2)}`}
-          color="#4EED59"
-          shadowColor="#116617"
-          onPress={inc2}
-          testID="greenBtn"
+          label={state.secondButton.label}
+          onPress={incrementSecondButton}
+          testID={TEST_IDS.GREEN_BUTTON}
+          {...ButtonUtils.createGreenButtonConfig()}
         />
-
+        <View style={styles.spacer} />
         <ChunkyButton
-          label={"Click this button\nfor a popup message"}
-          color="#C3BADA"
-          shadowColor="#390040"
+          label="Click this button for a popup message"
           onPress={openModal}
-          testID="popupBtn"
+          testID={TEST_IDS.POPUP_BUTTON}
+          {...ButtonUtils.createPurpleButtonConfig()}
         />
       </View>
 
-      <CongratsModal visible={open} onClose={closeModal} />
+      <CongratsModal 
+        visible={state.modal.isVisible} 
+        onClose={closeModal} 
+      />
     </SafeAreaView>
   );
-}
+};
+
+export default MainScreen;
