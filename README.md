@@ -7,7 +7,7 @@ It demonstrates:
 - A modal popup containing text and an animated GIF.
 - A maintainable structure following MVVM principles and clean coding practices.
 
-# Getting Started
+# Running the project
 
 ## Step 1: Start Metro
 
