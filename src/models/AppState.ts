@@ -11,7 +11,7 @@ export interface AppState {
 }
 
 /**
- * Factory function to create initial app state
+ * Function to create initial app state
  */
 export const createInitialAppState = (): AppState => ({
   firstButton: {

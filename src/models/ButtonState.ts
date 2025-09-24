@@ -1,5 +1,5 @@
 /**
- * Domain model representing the state of a button
+ * Model for the state of a button
  */
 export interface ButtonState {
   readonly count: number;
@@ -8,7 +8,7 @@ export interface ButtonState {
 }
 
 /**
- * Factory function to create a new ButtonState
+ * Function to create a new ButtonState
  */
 export const createButtonState = (
   count: number = 0,
@@ -21,7 +21,7 @@ export const createButtonState = (
 });
 
 /**
- * Utility function to get plural form of "time"
+ * Time handling
  */
 export const getPluralForm = (count: number): string => 
   count === 1 ? 'time' : 'times';

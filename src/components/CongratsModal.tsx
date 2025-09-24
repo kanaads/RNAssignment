@@ -10,17 +10,13 @@ import {
   HIT_SLOP 
 } from '../constants';
 
-/**
- * Props interface for CongratsModal component
- */
 interface CongratsModalProps {
   readonly visible: boolean;
   readonly onClose: () => void;
 }
 
 /**
- * CongratsModal component with clean architecture
- * Handles modal display and user interactions
+ * CongratsModal component for displaying gif, message
  */
 const CongratsModal: React.FC<CongratsModalProps> = ({
   visible,

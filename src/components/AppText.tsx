@@ -2,8 +2,7 @@ import React from 'react';
 import { Text, TextProps, StyleSheet } from 'react-native';
 
 /**
- * AppText component with consistent styling
- * Follows single responsibility principle
+ * AppText component with repeated styling
  */
 const AppText: React.FC<TextProps> = (props) => {
   return <Text {...props} style={[styles.text, props.style]} />;

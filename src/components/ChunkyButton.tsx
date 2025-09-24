@@ -16,8 +16,7 @@ interface ChunkyButtonProps extends ButtonConfig {
 }
 
 /**
- * ChunkyButton component with clean architecture
- * Follows single responsibility principle
+ * ChunkyButton component for reusable button with shadow
  */
 const ChunkyButton: React.FC<ChunkyButtonProps> = ({
   label,
@@ -64,7 +63,7 @@ const ChunkyButton: React.FC<ChunkyButtonProps> = ({
       hitSlop={HIT_SLOP.BUTTON}
       style={[styles.pressableWrap, containerStyle]}
     >
-      {/* Shadow layer (decorative) */}
+      {/* Shadow layer*/}
       <View
         pointerEvents="none"
         style={[styles.shadowBlock, shadowStyle]}

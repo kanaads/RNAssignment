@@ -1,5 +1,5 @@
 /**
- * Domain model representing the state of a modal
+ * Model for the state of a modal
  */
 export interface ModalState {
   readonly isVisible: boolean;
@@ -8,7 +8,7 @@ export interface ModalState {
 }
 
 /**
- * Factory function to create a new ModalState
+ * Function to create a new ModalState
  */
 export const createModalState = (
   isVisible: boolean = false,
