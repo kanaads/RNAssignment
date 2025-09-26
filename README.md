@@ -10,39 +10,46 @@ It demonstrates:
 # Running the project
 
 ## 0) Install deps
-## Use legacy resolver to avoid peer-deps conflicts
 npm install --legacy-peer-deps
-## or
+# or
 yarn install
 
 ## 1) Start Metro
 npm start
-## or
+# or
 yarn start
+# or (direct CLI)
+npx react-native start
+# (If 8081 is busy: npx react-native start --port 8082 --reset-cache)
 
 ## 2) Android
-
-In a new terminal (project root):
-
-## Using npm
+# Using package scripts
 npm run android
-## OR using Yarn
+# or
 yarn android
 
+# OR using the React Native CLI directly
+npx react-native run-android
+# If Metro is already running: 
+# npx react-native run-android --no-packager
+# If you started Metro on a custom port (e.g., 8082):
+# npx react-native run-android --no-packager --port 8082
+
+# Physical device (once per session, if needed)
+# adb reverse tcp:8081 tcp:8081
+# (or match your custom port: adb reverse tcp:8082 tcp:8082)
+
 ## 3) iOS (macOS)
-
-First time (or after native deps change), install CocoaPods via Bundler and then pods:
-
+# First time (or after native deps change), inside ios/
 bundle install
-bundle exec pod install  # runs inside ios/
+bundle exec pod install
 
-
-Then run the app:
-
-## Using npm
+# Run
 npm run ios
-## OR using Yarn
+# or
 yarn ios
+# or (direct CLI)
+npx react-native run-ios
 
 
 If everything is set up correctly, the app will launch in the Android Emulator, iOS Simulator, or a connected device. You can also build/run directly from Android Studio or Xcode.
