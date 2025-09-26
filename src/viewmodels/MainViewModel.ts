@@ -30,21 +30,28 @@ export class MainViewModel implements IViewModel {
 
   incrementFirstButton(): void {
     const newCount = this._state.firstButton.count + 1;
-    const newState = StateService.updateFirstButton(this._state, newCount);
-    this.updateState(newState);
+    // Increment first button and reset second button to zero
+    const stateAfterFirst = StateService.updateFirstButton(this._state, newCount);
+    const stateAfterResetSecond = StateService.updateSecondButton(stateAfterFirst, 0);
+    this.updateState(stateAfterResetSecond);
     AccessibilityService.announceButtonPress('First Button');
   }
 
   incrementSecondButton(): void {
     const newCount = this._state.secondButton.count + 1;
-    const newState = StateService.updateSecondButton(this._state, newCount);
-    this.updateState(newState);
+    // Increment second button and reset first button to zero
+    const stateAfterSecond = StateService.updateSecondButton(this._state, newCount);
+    const stateAfterResetFirst = StateService.updateFirstButton(stateAfterSecond, 0);
+    this.updateState(stateAfterResetFirst);
     AccessibilityService.announceButtonPress('Second Button');
   }
 
   openModal(): void {
-    const newState = StateService.updateModal(this._state, true);
-    this.updateState(newState);
+    // Open modal and reset both button counts to zero
+    const stateWithModal = StateService.updateModal(this._state, true);
+    const stateResetFirst = StateService.updateFirstButton(stateWithModal, 0);
+    const stateResetBoth = StateService.updateSecondButton(stateResetFirst, 0);
+    this.updateState(stateResetBoth);
     AccessibilityService.announcePopupOpening();
   }
 
@@ -73,3 +80,4 @@ export const useMainViewModel = (): IViewModel => {
     closeModal: useCallback(() => viewModel.closeModal(), [viewModel]),
   };
 };
+ 
